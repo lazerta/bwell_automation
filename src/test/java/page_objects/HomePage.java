@@ -1,14 +1,15 @@
 package page_objects;
 
 
+import generic.base.BasePage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import static generic.DriverFactory.*;
 
 
-public class HomePage {
+
+public class HomePage extends BasePage {
     @FindBy(id = "appName")
     @CacheLookup
     public WebElement applicationName;
@@ -21,15 +22,8 @@ public class HomePage {
     @CacheLookup
     @FindBy(id = "login-submit")
     public WebElement signInButton;
-    private static  HomePage page;
-    private HomePage() {
-       PageFactory.initElements(driver(), this);
-    }
 
-    public static HomePage getInstance() {
-        if (page == null){
-            page = new HomePage();
-        }
-        return  page;
-    }
+
+
+
 }

@@ -1,42 +1,59 @@
 package page_objects;
 
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
+import generic.base.BasePage;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import static generic.DriverFactory.driver;
 
-public class BuildPage {
+public class BuildPage extends BasePage {
     @FindBy(xpath = "//div[contains(text(),'Appointments')]")
     @CacheLookup
     public WebElement appointmentTab;
-    @FindBy(xpath = "//div[contains(text(),'Services')])")
+    @FindBy(xpath = "//div[contains(text(),'Services')]")
     public WebElement serviceTab;
-    @FindBy(xpath = "textfield-1455-inputEl")
-    public  WebElement searchInput;
-    private static  BuildPage page;
-    private BuildPage() {
-        PageFactory.initElements(driver(), this);
-    }
+    @FindBy(xpath = "//input[@placeholder='Search']")
+    public WebElement searchInput;
+    @FindBy(xpath = "//tbody[contains(@id,'gridview')]")
+    public WebElement table;
+    @FindBy(xpath = "//span[text()='Show Fullscreen']/parent::span")
+    public WebElement fullScreenButton;
+    @FindBy(xpath = "//input[@placeholder='Service Name']")
+    public WebElement serviceNameInput;
+    @FindBy(xpath = "//span[contains(text(),'Analytics')]")
+    public WebElement analyticsTab;
 
-    public static BuildPage getInstance() {
-        if (page == null){
-            page = new BuildPage();
-        }
-        return  page;
-    }
 
-    public void openServiceTab(){
+    public void openServiceTab() {
         appointmentTab.click();
         serviceTab.click();
     }
 
-    public  void searchForServiceName(String serviceName){
+    public void searchForServiceName(String serviceName) {
         openServiceTab();
-        searchInput.sendKeys(serviceName);
-        searchInput.sendKeys(Keys.ENTER);
+        searchInput.sendKeys(serviceName,Keys.ENTER);
+
     }
+
+
+    public void columnSort(String column, String sortOrder) {
+        wait(3).until(ExpectedConditions.visibilityOfElementLocated(By.tagName("table")));
+        //"//span[text()=" + column + "][1]"
+        String columnXpath = String.format("//span[text()='%s']", column);
+        WebElement columnElement = driver.findElement(By.xpath(columnXpath));
+        mouseOver(columnElement);
+
+        String popUpXpath = String.format("//span[text()='%s']/following-sibling::div[1]", column);
+        driver.findElement(By.xpath(popUpXpath)).click();
+
+        String sortXpath = String.format("//span[text()= '%s']", sortOrder);
+        driver.findElement(By.xpath(sortXpath)).click();
+    }
+    public void clickFullScreenButton(){
+        openServiceTab();
+       fullScreenButton.click();
+    }
+
 
 }
