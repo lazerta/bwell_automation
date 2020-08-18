@@ -11,7 +11,7 @@
 Enter following command from your terminal 
  ```shell script
 mvn test 
-```
+ ```
 ## Reporting
 A HTML report will be generated in ``target/cucumber-report`` under working directory of the project
 
@@ -29,7 +29,7 @@ https://stackoverflow.com/questions/46671308/how-to-create-a-java-maven-project-
 
 
 ## Structure
-``shell
+<pre>
 ├───main
 │   ├───java
 │   └───resources
@@ -46,4 +46,4 @@ https://stackoverflow.com/questions/46671308/how-to-create-a-java-maven-project-
     │       └───hooks
     └───resources
         └───features
-``
+</pre>
