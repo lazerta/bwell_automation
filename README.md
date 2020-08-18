@@ -20,5 +20,29 @@ Driver for Chrome will be downloaded automatically.
 Check POM.xml for dependencies 
 
 ## Import Project Into Intelli 
-please follow 
+Please follow 
 https://vaadin.com/learn/tutorials/import-maven-project-intellij-idea
+
+## Import Project Into VSCode
+Please follow 
+https://stackoverflow.com/questions/46671308/how-to-create-a-java-maven-project-that-works-in-visual-studio-code
+
+
+## Structure
+
+├───main
+│   ├───java
+│   └───resources
+└───test
+    ├───java
+    │   ├───generic  # all generic AUT independent code  
+    │   │   ├───base  #  base utility
+    │   │   ├───listeners 
+    │   │   │   └───web # Selenium listener 
+    │   │   └───po   # page object for complex web elements such as table
+    │   ├───page_objects  # Page Object of AUT
+    │   ├───runners  # Cucumber runner
+    │   └───steps
+    │       └───hooks
+    └───resources
+        └───features
